@@ -1,0 +1,24 @@
+<div id="backdrop"></div>
+<div id="modal">
+  <h2>New Account</h2>
+  <div>
+    <label for="name">Name: </label>
+    <input type="text" id="name" />
+  </div>
+  <div>
+    <label for="currency">Currency: </label>
+    <select id="currency">
+      @for (currency of currencies; track $index) {
+      <option [value]="currency">{{ currency }}</option>
+      }
+    </select>
+  </div>
+  <div>
+    <label for="amount">Balance: </label>
+    <input type="number" id="amount" />
+  </div>
+  <div id="newAccountButtons">
+    <button (click)="handleClose()">Cancel</button>
+    <button id="createAccount">Create Account</button>
+  </div>
+</div>

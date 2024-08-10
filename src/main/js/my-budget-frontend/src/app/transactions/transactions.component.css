@@ -1,0 +1,16 @@
+#transactions {
+  flex-direction: column;
+}
+
+#widthContainer {
+  flex-direction: column;
+}
+
+button {
+  border: 1px solid black;
+  background-color: white;
+  height: 26px;
+  width: 110px;
+  border-radius: 13px;
+  cursor: pointer;
+}

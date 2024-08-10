@@ -1,0 +1,27 @@
+#newTransaction {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 2px solid black;
+  height: 8vh;
+}
+
+.widthContainer {
+  align-items: center;
+}
+
+button {
+  border: 2px solid black;
+  background-color: white;
+  height: 28px;
+  width: 130px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#balance {
+  font-size: 1.1em;
+  font-weight: 800;
+}
