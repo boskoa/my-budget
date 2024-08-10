@@ -9,6 +9,6 @@
   <button (click)="openModal()">New account</button>
 </div>
 <app-new-transaction></app-new-transaction>
-@if (showModal) {
+@if (showAccountModal) {
 <app-new-account-modal (closeClicked)="closeModal()"></app-new-account-modal>
 }

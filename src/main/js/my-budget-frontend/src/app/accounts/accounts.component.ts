@@ -15,13 +15,13 @@ import { NewAccountModalComponent } from "../new-account-modal/new-account-modal
   styleUrl: "./accounts.component.css",
 })
 export class AccountsComponent {
-  showModal: Boolean = false;
+  showAccountModal: Boolean = false;
 
   openModal() {
-    this.showModal = true;
+    this.showAccountModal = true;
   }
 
   closeModal() {
-    this.showModal = false;
+    this.showAccountModal = false;
   }
 }

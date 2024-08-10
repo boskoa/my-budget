@@ -1,6 +1,9 @@
 <div id="newTransaction">
   <div class="widthContainer">
-    <button>New transaction</button>
+    <button (click)="openModal()">New transaction</button>
     <div id="balance"> Available: {{ balance }}</div>
   </div>
 </div>
+@if (showTransactionModal) {
+<app-new-transaction-modal (closeClicked)="closeModal()"></app-new-transaction-modal>
+}
