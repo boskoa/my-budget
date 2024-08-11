@@ -3,11 +3,11 @@
   <h2>New Account</h2>
   <div>
     <label for="name">Name: </label>
-    <input type="text" id="name" />
+    <input type="text" id="name" autocomplete="off" />
   </div>
   <div>
     <label for="currency">Currency: </label>
-    <select id="currency">
+    <select id="currency" autocomplete="off">
       @for (currency of currencies; track $index) {
       <option [value]="currency">{{ currency }}</option>
       }
@@ -15,7 +15,7 @@
   </div>
   <div>
     <label for="amount">Balance: </label>
-    <input type="number" id="amount" />
+    <input type="number" id="amount" autocomplete="off" />
   </div>
   <div id="newAccountButtons">
     <button (click)="handleClose()">Cancel</button>

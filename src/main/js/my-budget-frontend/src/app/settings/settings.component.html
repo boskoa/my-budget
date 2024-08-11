@@ -1,0 +1,19 @@
+<div class="widthContainer">
+  <div id="settingsContainer">
+    <div class="section">
+      <span>Default currency</span>
+      <select id="currency" autocomplete="off">
+        @for (currency of currencies; track $index) {
+        <option [value]="currency">{{ currency }}</option>
+        }
+      </select>
+    </div>
+    <div class="section">
+      <span>Delete all data</span>
+    </div>
+    <div class="section">
+      <span>Exchange rate updated</span>
+      <span>22.07.2024.</span>
+    </div>
+  </div>
+</div>
