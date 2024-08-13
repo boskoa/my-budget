@@ -9,6 +9,7 @@
 #modal {
   position: fixed;
   left: calc(50% - 160px);
+  top: 30vh;
   width: 320px;
   display: flex;
   flex-direction: column;

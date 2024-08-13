@@ -17,7 +17,7 @@ public class Account {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "account_id")
   private long id;
-  @Column(name = "name")
+  @Column(name = "name", unique = true)
   private String name;
   @Column(name = "currency")
   private String currency;
@@ -33,10 +33,10 @@ public class Account {
     this.transactions = null;
   }
 
-  public Account(String name, String currency, double balance) {
+  public Account(String name, String currency) {
     this.name = name;
     this.currency = currency;
-    this.balance = balance;
+    this.balance = 0;
     this.transactions = new ArrayList<>();
   }
 

@@ -11,35 +11,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.my_budget.ResourceNotFoundException;
 import com.example.my_budget.entities.Account;
+import com.example.my_budget.entities.Transaction;
 import com.example.my_budget.repositories.AccountRepository;
+import com.example.my_budget.repositories.TransactionRepository;
+import com.example.my_budget.types.AccountForm;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class AccountController {
   private AccountRepository accountRepository;
+  private TransactionRepository transactionRepository;
 
-  public AccountController(AccountRepository accountRepository) {
+  public AccountController(AccountRepository accountRepository, TransactionRepository transactionRepository) {
     this.accountRepository = accountRepository;
+    this.transactionRepository = transactionRepository;
   }
 
-  @GetMapping("/accounts")
+  @GetMapping("/api/v1/accounts")
   public ResponseEntity<Iterable<Account>> getAccounts() {
     return new ResponseEntity<>(this.accountRepository.findAll(), HttpStatus.OK);
   }
 
-  @GetMapping("/simple")
+  @GetMapping("/api/v1/simple")
   public Iterable<Object> getSimpleAccounts() {
     return this.accountRepository.findAllSimple();
   }
 
-  /*
-   * @GetMapping("/accounts")
-   * public List<Account> getAccounts() {
-   * return (List<Account>) this.accountRepository.findAll();
-   * }
-   */
-
-  @GetMapping("/accounts/{id}")
+  @GetMapping("/api/v1/accounts/{id}")
   public ResponseEntity<Account> getAccountById(@PathVariable("id") long id) {
     Account account = this.accountRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Account with id " + id + " not found"));
@@ -47,8 +45,12 @@ public class AccountController {
     return new ResponseEntity<>(account, HttpStatus.OK);
   }
 
-  @PostMapping("/accounts")
-  public void addAccount(@RequestBody Account account) {
-    this.accountRepository.save(account);
+  @PostMapping("/api/v1/accounts")
+  public void addAccount(@RequestBody AccountForm accountForm) {
+    Account newAccount = new Account(accountForm.name, accountForm.currency);
+    this.accountRepository.save(newAccount);
+    Transaction initialTransaction = new Transaction("Initial transaction", accountForm.balance, accountForm.currency,
+        newAccount);
+    this.transactionRepository.save(initialTransaction);
   }
 }

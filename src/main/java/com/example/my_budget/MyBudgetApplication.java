@@ -20,13 +20,13 @@ public class MyBudgetApplication {
 	@Bean
 	CommandLineRunner init(AccountRepository accountRepository, TransactionRepository transactionRepository) {
 		return (args) -> {
-			Account account1 = new Account("Metan", "EUR", 0);
+			Account account1 = new Account("Metan", "EUR");
 			accountRepository.save(account1);
-			Account account2 = new Account("Etan", "USD", 1000);
+			Account account2 = new Account("Etan", "USD");
 			accountRepository.save(account2);
-			Account account3 = new Account("Propan", "EUR", 50.5);
+			Account account3 = new Account("Propan", "EUR");
 			accountRepository.save(account3);
-			Transaction transaction1 = new Transaction("Lunch", 100, "EUR", account1);
+			Transaction transaction1 = new Transaction("Lunch", 100, "eur", account1);
 			transactionRepository.save(transaction1);
 
 			accountRepository.findAll().forEach((account) -> {

@@ -10,4 +10,6 @@ import com.example.my_budget.entities.Account;
 public interface AccountRepository extends CrudRepository<Account, Long> {
   @Query("select id, name, currency, balance from Account")
   Iterable<Object> findAllSimple();
+
+  Account findByNameIgnoreCase(String name);
 }

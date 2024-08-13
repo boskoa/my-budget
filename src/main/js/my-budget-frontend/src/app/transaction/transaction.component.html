@@ -1,1 +1,14 @@
-<p>Dummy transaction</p>
+@if (transaction && convertedValue) {
+<div class="transaction">
+  <div class="transactionSection">
+    <p class="upper">{{transaction.description}}</p>
+    <p class="lower">{{transaction.account}}</p>
+  </div>
+  <div class="transactionSection" id="right">
+    <p class="upper">{{convertedValue}}
+      {{defaultCurrency.toUpperCase()}}
+    </p>
+    <p class="lower">{{transaction.amount}} {{transaction.currency.toUpperCase()}}</p>
+  </div>
+</div>
+}

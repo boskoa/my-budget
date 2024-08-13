@@ -1,10 +1,18 @@
 <div class="widthContainer" id="transactions">
+  @if (transactions.length){
   <div id="transactionsList">
-    <app-transaction></app-transaction>
-    <app-transaction></app-transaction>
-    <app-transaction></app-transaction>
-    <app-transaction></app-transaction>
-    <app-transaction></app-transaction>
+    @for (transaction of transactions; track transaction.id) {
+    <div class="transactionContainer">
+      <app-transaction [transaction]="transaction"></app-transaction>
+    </div>
+    }
   </div>
+  }
+  <select id="accounts" autocomplete="off" (change)="onChange($event.target)">
+    <option selected value="">All accounts</option>
+    @for (account of accounts; track $index) {
+    <option [value]="account">{{account}}</option>
+    }
+  </select>
 </div>
 <app-new-transaction></app-new-transaction>

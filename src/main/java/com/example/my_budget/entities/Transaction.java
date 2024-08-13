@@ -37,6 +37,7 @@ public class Transaction {
     this.amount = amount;
     this.currency = currency;
     this.account = account;
+    this.account.changeBalance(this.amount);
   }
 
   public long getId() {

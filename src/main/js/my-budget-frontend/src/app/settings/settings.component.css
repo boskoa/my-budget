@@ -19,3 +19,12 @@ select {
   border: none;
   background-color: inherit;
 }
+
+footer {
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  bottom: 10px;
+  left: auto;
+  font-size: 0.8em;
+}

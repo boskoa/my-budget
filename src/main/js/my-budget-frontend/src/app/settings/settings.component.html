@@ -2,9 +2,14 @@
   <div id="settingsContainer">
     <div class="section">
       <span>Default currency</span>
-      <select id="currency" autocomplete="off">
+      <select id="currency" autocomplete="off" (change)="onChange($event.target)">
         @for (currency of currencies; track $index) {
-        <option [value]="currency">{{ currency }}</option>
+        @if (currency === defaultCurrency) {
+        <option [value]="currency" selected>{{ currency.toUpperCase() }}</option>
+        }
+        @else {
+        <option [value]="currency">{{ currency.toUpperCase() }}</option>
+        }
         }
       </select>
     </div>
@@ -13,7 +18,8 @@
     </div>
     <div class="section">
       <span>Exchange rate updated</span>
-      <span>22.07.2024.</span>
+      <span>{{exchangeRatesDate}}</span>
     </div>
   </div>
 </div>
+<footer>Copyright "The Client" 2024</footer>
