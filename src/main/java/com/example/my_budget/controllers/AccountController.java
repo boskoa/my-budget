@@ -48,6 +48,7 @@ public class AccountController {
   @PostMapping("/api/v1/accounts")
   public void addAccount(@RequestBody AccountForm accountForm) {
     Account newAccount = new Account(accountForm.name, accountForm.currency);
+    newAccount.changeBalance(accountForm.balance);
     this.accountRepository.save(newAccount);
     Transaction initialTransaction = new Transaction("Initial transaction", accountForm.balance, accountForm.currency,
         newAccount);

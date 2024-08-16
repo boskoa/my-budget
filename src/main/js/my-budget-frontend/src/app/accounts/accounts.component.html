@@ -1,12 +1,16 @@
 <div class="widthContainer" id="accounts">
+  @if (accounts.length) {
   <div id="accountsList">
     @for (account of accounts; track account.id) {
-    <app-account [account]="account"></app-account>
+    <div class="accountContainer">
+      <app-account [account]="account" [balance]="account.balance"></app-account>
+    </div>
     }
   </div>
   <button (click)="openModal()">New account</button>
+  }
 </div>
-<app-new-transaction></app-new-transaction>
+<app-new-transaction [resetTransactions]="" [resetAccounts]="resetAccounts"></app-new-transaction>
 @if (showAccountModal) {
-<app-new-account-modal (closeClicked)="closeModal()"></app-new-account-modal>
+<app-new-account-modal (closeClicked)="closeModal()" [resetAccounts]="resetAccounts"></app-new-account-modal>
 }

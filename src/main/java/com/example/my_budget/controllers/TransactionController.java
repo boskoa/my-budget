@@ -57,6 +57,8 @@ public class TransactionController {
           transactionForm.currency,
           account);
       this.transactionRepository.save(newTransaction);
+      account.changeBalance(transactionForm.convertedAmount);
+      this.accountRepository.save(account);
       return new ResponseEntity<>(newTransaction, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>("Error " + e.getMessage(), HttpStatus.BAD_REQUEST);

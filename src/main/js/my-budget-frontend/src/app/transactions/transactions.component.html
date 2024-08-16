@@ -8,11 +8,11 @@
     }
   </div>
   }
-  <select id="accounts" autocomplete="off" (change)="onChange($event.target)">
+  <select id="accountsSelector" autocomplete="off" (change)="onChange($event.target)">
     <option selected value="">All accounts</option>
     @for (account of accounts; track $index) {
     <option [value]="account">{{account}}</option>
     }
   </select>
 </div>
-<app-new-transaction></app-new-transaction>
+<app-new-transaction [resetTransactions]="onChange" [resetAccounts]=""></app-new-transaction>

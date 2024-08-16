@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, SimpleChanges } from "@angular/core";
 import {
   Transaction,
   TransactionComponent,
@@ -20,6 +20,8 @@ import { AccountsService } from "../accounts.service";
   styleUrl: "./transactions.component.css",
 })
 export class TransactionsComponent implements OnInit {
+  lastSelected: string = "";
+
   constructor(
     private transactionsService: TransactionsService,
     private accountsService: AccountsService
@@ -30,9 +32,7 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.transactionsService.getTransactions("").subscribe((data) => {
-      for (const value of Object.values(data)) {
-        this.transactions.push(value);
-      }
+      this.transactions = Object.values(data);
     });
 
     this.accountsService.getAccounts().subscribe((data) => {
@@ -42,9 +42,17 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
-  onChange(target: any) {
+  onChange = (target: any) => {
     this.transactions = [];
-    if (target.value.length > 0) {
+    if (target.value === "reset") {
+      this.transactionsService
+        .getTransactions(this.lastSelected ? `?owner=${this.lastSelected}` : "")
+        .subscribe((data) => {
+          for (const value of Object.values(data)) {
+            this.transactions.push(value);
+          }
+        });
+    } else if (target.value.length > 0) {
       this.transactionsService
         .getTransactions(`?owner=${target.value}`)
         .subscribe((data) => {
@@ -52,12 +60,14 @@ export class TransactionsComponent implements OnInit {
             this.transactions.push(value);
           }
         });
+      this.lastSelected = target.value;
     } else {
       this.transactionsService.getTransactions("").subscribe((data) => {
         for (const value of Object.values(data)) {
           this.transactions.push(value);
         }
       });
+      this.lastSelected = target.value;
     }
-  }
+  };
 }

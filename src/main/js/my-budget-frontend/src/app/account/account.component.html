@@ -1,6 +1,13 @@
 @if (account) {
-<p>{{account.id}}</p>
-<p>{{account.name}}</p>
-<p>{{account.currency}}</p>
-<p>{{account.balance}}</p>
+<div class="account">
+  <div class="accountSection">
+    <p class="upper">{{account.name}}</p>
+  </div>
+  <div class="accountSection" id="right">
+    <p class="upper">{{convertedValue}}
+      {{defaultCurrency.toUpperCase()}}
+    </p>
+    <p class="lower">{{formattedBalance}} {{account.currency.toUpperCase()}}</p>
+  </div>
+</div>
 }

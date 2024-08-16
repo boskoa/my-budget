@@ -1,9 +1,13 @@
 <div id="newTransaction">
   <div class="widthContainer">
     <button (click)="openModal()">New transaction</button>
-    <div id="balance"> Available: {{ balance }}</div>
+    <div id="balance">
+      <span>Available: {{total}} </span>
+      <span>{{defaultCurrency.toUpperCase()}}</span>
+    </div>
   </div>
 </div>
 @if (showTransactionModal) {
-<app-new-transaction-modal (closeClicked)="closeModal()"></app-new-transaction-modal>
+<app-new-transaction-modal (closeClicked)="closeModal()" [resetTransactions]="resetTransactions"
+  [resetAccounts]="resetAccounts" [calculateTotal]="calculateTotal"></app-new-transaction-modal>
 }
