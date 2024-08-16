@@ -19,8 +19,15 @@ export class NewTransactionComponent implements OnInit {
   total: string = "";
   accounts: Array<Account> = [];
   defaultCurrency: string = "";
+  exchangeRates: any;
+  fetched: boolean = false;
 
   showTransactionModal: Boolean = false;
+
+  constructor(
+    private accountsService: AccountsService,
+    private defaultCurrencyService: DefaultCurrencyService
+  ) {}
 
   openModal() {
     this.showTransactionModal = true;
@@ -37,17 +44,24 @@ export class NewTransactionComponent implements OnInit {
         style: "decimal",
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
-      }).format(this.accounts.reduce((p, c) => (p += c.balance), 0));
+      }).format(
+        this.accounts.reduce(
+          (p, c) => (p += c.balance / this.exchangeRates[c.currency]),
+          0
+        )
+      );
     });
   };
 
   ngOnInit(): void {
-    this.calculateTotal();
     this.defaultCurrency = this.defaultCurrencyService.getDefaultCurrency();
+    if (this.defaultCurrency) {
+      this.defaultCurrencyService
+        .getCurrencyRates(this.defaultCurrency)
+        .subscribe((data: any) => {
+          this.exchangeRates = data[this.defaultCurrency];
+          this.calculateTotal();
+        });
+    }
   }
-
-  constructor(
-    private accountsService: AccountsService,
-    private defaultCurrencyService: DefaultCurrencyService
-  ) {}
 }

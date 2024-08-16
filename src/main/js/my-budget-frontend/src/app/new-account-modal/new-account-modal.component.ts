@@ -61,7 +61,6 @@ export class NewAccountModalComponent implements OnInit {
         currency: this.newAccountForm.value.currency,
         balance: Number(this.newAccountForm.value.amount),
       };
-      console.log("ACCOUNT", accountData);
       this.accountsService.createAccount(accountData).subscribe((res) => {
         if (res.status === 200) {
           if (error) {

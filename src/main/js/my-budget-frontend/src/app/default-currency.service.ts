@@ -19,6 +19,7 @@ export class DefaultCurrencyService {
   }
 
   getExchangeRates() {
+    this.getCurrencyRates(this.defaultCurrency);
     return this.exchangeRates;
   }
 
