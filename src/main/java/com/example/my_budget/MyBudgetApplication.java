@@ -29,6 +29,9 @@ public class MyBudgetApplication {
 			Transaction transaction1 = new Transaction("Lunch", 100, "eur", account1);
 			transactionRepository.save(transaction1);
 
+			XmlParser parser = new XmlParser(accountRepository, transactionRepository);
+			parser.parse();
+
 			accountRepository.findAll().forEach((account) -> {
 				System.out.println(account);
 			});

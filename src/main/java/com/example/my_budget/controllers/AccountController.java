@@ -50,8 +50,10 @@ public class AccountController {
     Account newAccount = new Account(accountForm.name, accountForm.currency);
     newAccount.changeBalance(accountForm.balance);
     this.accountRepository.save(newAccount);
-    Transaction initialTransaction = new Transaction("Initial transaction", accountForm.balance, accountForm.currency,
-        newAccount);
-    this.transactionRepository.save(initialTransaction);
+    if (accountForm.balance > 0) {
+      Transaction initialTransaction = new Transaction("Initial transaction", accountForm.balance, accountForm.currency,
+          newAccount);
+      this.transactionRepository.save(initialTransaction);
+    }
   }
 }

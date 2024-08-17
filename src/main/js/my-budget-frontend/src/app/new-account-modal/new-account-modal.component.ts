@@ -25,11 +25,7 @@ export class NewAccountModalComponent implements OnInit {
   newAccountForm = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(2)]),
     currency: new FormControl("", [Validators.required]),
-    amount: new FormControl(0, [
-      Validators.required,
-      Validators.min(0.01),
-      Validators.max(1000000),
-    ]),
+    amount: new FormControl(0, [Validators.max(1000000)]),
   });
 
   currencies: String[] = [];
@@ -51,11 +47,7 @@ export class NewAccountModalComponent implements OnInit {
       error.classList.remove("openError");
     }
 
-    if (
-      this.newAccountForm.value.name &&
-      this.newAccountForm.value.currency &&
-      this.newAccountForm.value.amount
-    ) {
+    if (this.newAccountForm.value.name && this.newAccountForm.value.currency) {
       accountData = {
         name: this.newAccountForm.value.name,
         currency: this.newAccountForm.value.currency,
