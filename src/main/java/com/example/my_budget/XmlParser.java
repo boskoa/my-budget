@@ -41,7 +41,7 @@ public class XmlParser {
         if (accountNode.getNodeType() == Node.ELEMENT_NODE) {
           Element accountElement = (Element) accountNode;
           String name = accountElement.getAttribute("name");
-          String currency = accountElement.getAttribute("currency");
+          String currency = accountElement.getAttribute("currency").toLowerCase();
           Account account = new Account(name, currency);
           this.accountRepository.save(account);
 

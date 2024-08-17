@@ -5,8 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.example.my_budget.entities.Account;
-import com.example.my_budget.entities.Transaction;
 import com.example.my_budget.repositories.AccountRepository;
 import com.example.my_budget.repositories.TransactionRepository;
 
@@ -20,17 +18,14 @@ public class MyBudgetApplication {
 	@Bean
 	CommandLineRunner init(AccountRepository accountRepository, TransactionRepository transactionRepository) {
 		return (args) -> {
-			Account account1 = new Account("Metan", "eur");
-			accountRepository.save(account1);
-			Account account2 = new Account("Etan", "usd");
-			accountRepository.save(account2);
-			Account account3 = new Account("Propan", "eur");
-			accountRepository.save(account3);
-			Transaction transaction1 = new Transaction("Lunch", 100, "eur", account1);
-			transactionRepository.save(transaction1);
+			boolean dbIsEmpty = true;
+			dbIsEmpty = accountRepository.count() == 0;
 
-			XmlParser parser = new XmlParser(accountRepository, transactionRepository);
-			parser.parse();
+			if (dbIsEmpty) {
+				System.out.println("Initializing DB");
+				XmlParser parser = new XmlParser(accountRepository, transactionRepository);
+				parser.parse();
+			}
 
 			accountRepository.findAll().forEach((account) -> {
 				System.out.println(account);
