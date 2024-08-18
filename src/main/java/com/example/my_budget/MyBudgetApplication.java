@@ -30,11 +30,11 @@ public class MyBudgetApplication {
 				System.out.println("Initializing DB");
 				XmlParser parser = new XmlParser(accountRepository, transactionRepository);
 				parser.parse();
+			} else {
+				System.out.println("DB already initialized");
 			}
 
-			accountRepository.findAll().forEach((account) -> {
-				System.out.println(account);
-			});
+			return;
 		};
 	}
 
