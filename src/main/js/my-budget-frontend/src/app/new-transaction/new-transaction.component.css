@@ -20,6 +20,12 @@ button {
   border-radius: 14px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    filter: invert();
+    border-color: white;
+  }
 }
 
 #balance {

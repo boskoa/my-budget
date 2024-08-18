@@ -6,6 +6,33 @@
   font-family: sans-serif;
 }
 
+html {
+  &::-webkit-scrollbar {
+    background-color: black;
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: black;
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: gold;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-button:single-button:vertical:decrement {
+    height: 0px;
+    width: 0px;
+  }
+
+  &::-webkit-scrollbar-button:single-button:vertical:increment {
+    height: 0px;
+    width: 0px;
+  }
+}
+
 .widthContainer {
   display: flex;
   justify-content: space-between;

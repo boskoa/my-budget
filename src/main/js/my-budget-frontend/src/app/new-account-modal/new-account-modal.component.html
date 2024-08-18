@@ -10,7 +10,7 @@
       <label for="currency">Currency: </label>
       <select id="currency" autocomplete="off" formControlName="currency">
         @for (currency of currencies; track $index) {
-        <option [value]="currency">{{ currency }}</option>
+        <option [value]="currency">{{currency.toUpperCase()}}</option>
         }
       </select>
     </div>

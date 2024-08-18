@@ -47,6 +47,12 @@ button {
   font-weight: 600;
   cursor: pointer;
   margin-left: 20px;
+  transition: all 0.2s;
+
+  &:hover {
+    filter: invert();
+    border-color: white;
+  }
 }
 
 #amountContainer {
