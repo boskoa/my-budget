@@ -20,4 +20,10 @@ export class AccountsService {
       observe: "response",
     });
   }
+
+  deleteAccounts() {
+    return this.http.delete<Object>(this.baseUrl, {
+      observe: "response",
+    });
+  }
 }

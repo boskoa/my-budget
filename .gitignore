@@ -34,3 +34,7 @@ build/
 
 ### Database ###
 *.db
+
+### Node ###
+**/node
+**/node_modules

@@ -28,3 +28,54 @@ footer {
   left: auto;
   font-size: 0.8em;
 }
+
+#delete {
+  position: relative;
+  overflow: hidden;
+}
+
+#confirm {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid black;
+  background-color: white;
+  height: 26px;
+  width: 100px;
+  border-radius: 13px;
+  cursor: pointer;
+  margin: 10px;
+  transition: all 0.3s;
+}
+
+.show {
+  transform: translateX(130px);
+}
+
+#deleteButton {
+  border: none;
+  background-color: white;
+  font-size: 1em;
+  cursor: pointer;
+  width: 110px;
+  height: 30px;
+  text-align: left;
+  z-index: 2;
+  transition: all 0.3s;
+
+  &:hover {
+    color: red;
+  }
+}
+
+#serverResponse {
+  position: absolute;
+  right: -150px;
+  z-index: 1;
+  width: 130px;
+  text-align: right;
+  transition: 0.5s all 0.3s;
+}
+
+.message {
+  transform: translateX(-150px);
+}

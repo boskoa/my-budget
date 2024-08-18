@@ -13,8 +13,10 @@
         }
       </select>
     </div>
-    <div class="section">
-      <span>Delete all data</span>
+    <div id="delete" class="section">
+      <button (click)="showDeleteButton()" id="deleteButton">Delete all data</button>
+      <button (click)="handleDelete()" id="confirm" [class.show]="deleteButtonVisibility">Are you sure</button>
+      <span id="serverResponse" [class.message]="deleteResponseVisibility">{{deleteResponseText}}</span>
     </div>
     <div class="section">
       <span>Exchange rate updated</span>

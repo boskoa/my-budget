@@ -57,6 +57,83 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.13.3</version>
+				<executions>
+					<execution>
+            <id>install node and npm</id>
+            <goals>
+                <goal>install-node-and-npm</goal>
+            </goals>
+            <phase>generate-resources</phase>
+					</execution>
+					<execution>
+							<id>npm install</id>
+							<goals>
+									<goal>npm</goal>
+							</goals>
+							<configuration>
+									<arguments>install</arguments>
+							</configuration>
+					</execution>
+					<execution>
+							<id>npm run build</id>
+							<goals>
+									<goal>npm</goal>
+							</goals>
+							<configuration>
+									<arguments>run build</arguments>
+							</configuration>
+					</execution>
+				</executions>
+					<configuration>
+					<nodeVersion>v22.6.0</nodeVersion>
+					<workingDirectory>src/main/js/my-budget-frontend</workingDirectory>
+			</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-frontend</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/classes/static</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/js/my-budget-frontend/dist/my-budget-frontend/browser</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>copy-xml-db</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}</directory>
+									<includes>
+										<include>my_budget_data.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
