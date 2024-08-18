@@ -12,13 +12,14 @@ header {
 }
 
 h1 {
+  font-size: 34px;
   color: transparent;
-  background-image: radial-gradient(circle at 50%, gold 10px, black 10px, black 100%);
+  background-image: radial-gradient(circle at 50%, gold 14px, black 14px, black 100%);
   background-size: 240% 100%;
   background-position: 100% 0px;
   background-repeat: no-repeat;
   background-clip: text;
-  transition: all 1.8s;
+  transition: background-position 1.8s;
   z-index: 1;
 
   &:hover {
@@ -27,6 +28,7 @@ h1 {
 
   @media only screen and (max-width: 440px) {
     font-size: 20px;
+    background-image: radial-gradient(circle at 50%, gold 8px, black 8px, black 100%);
   }
 }
 

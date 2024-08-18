@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import com.example.my_budget.entities.Account;
 import com.example.my_budget.entities.Transaction;
 import com.example.my_budget.repositories.AccountRepository;
 import com.example.my_budget.repositories.TransactionRepository;
+import com.example.my_budget.types.TransactionDetails;
 import com.example.my_budget.types.TransactionForm;
 
 @RestController
@@ -63,5 +65,28 @@ public class TransactionController {
     } catch (Exception e) {
       return new ResponseEntity<>("Error " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
+  }
+
+  // Not required on frontend. Should be adapted based on frontend
+  // requirements
+  @PutMapping("/api/v1/transactions/{id}")
+  public ResponseEntity<?> updateTransaction(@PathVariable("id") long id,
+      @RequestBody TransactionDetails newDetails) {
+    Transaction transaction = this.transactionRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Transaction with id " + id + " not found"));
+
+    try {
+      Account account = accountRepository.findById(newDetails.ownerId).get();
+      transaction.setDescription(newDetails.description);
+      transaction.setAmount(newDetails.amount);
+      transaction.setCurrency(newDetails.currency);
+      transactionRepository.save(transaction);
+      account.changeBalance(newDetails.convertedAmount);
+      this.accountRepository.save(account);
+    } catch (Exception e) {
+      return new ResponseEntity<>("Error " + e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    return new ResponseEntity<>(transaction, HttpStatus.OK);
   }
 }
