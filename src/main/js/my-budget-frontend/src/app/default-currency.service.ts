@@ -6,8 +6,8 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class DefaultCurrencyService {
-  private defaultCurrency: string = "";
-  private exchangeRates = {};
+  private defaultCurrency: string = "eur";
+  private exchangeRates: any;
 
   getDefaultCurrency(): string {
     return this.defaultCurrency;

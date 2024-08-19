@@ -56,11 +56,25 @@ export class SettingsComponent implements OnInit, DoCheck {
     });
 
     this.defaultCurrency = this.defaultCurrencyService.getDefaultCurrency();
+
+    document.addEventListener("click", (e: Event) => {
+      const deleteButton = document.getElementById("confirm");
+      const showDeleteButton = document.getElementById("deleteButton");
+      if (
+        this.deleteButtonVisibility &&
+        deleteButton &&
+        !deleteButton.contains(e.target as Node) &&
+        showDeleteButton &&
+        !showDeleteButton.contains(e.target as Node)
+      ) {
+        this.deleteButtonVisibility = false;
+      }
+    });
   }
 
   ngDoCheck() {
     const exchangeRates: any = this.defaultCurrencyService.getExchangeRates();
-    if (exchangeRates.date) {
+    if (typeof exchangeRates === "object") {
       this.exchangeRatesDate = new Intl.DateTimeFormat("sr-RS").format(
         new Date(exchangeRates.date)
       );

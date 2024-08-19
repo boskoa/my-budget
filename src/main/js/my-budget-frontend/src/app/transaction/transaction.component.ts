@@ -19,12 +19,17 @@ export class TransactionComponent implements OnInit {
   ngOnInit(): void {
     this.exchangeRates = this.defaultCurrencyService.getExchangeRates();
     this.defaultCurrency = this.defaultCurrencyService.getDefaultCurrency();
-    if (this.transaction?.currency && this.exchangeRates) {
-      this.convertedValue = new Intl.NumberFormat("sr-SR", {
-        style: "decimal",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }).format(
+    const formatter = new Intl.NumberFormat("sr-SR", {
+      style: "decimal",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    if (
+      this.transaction?.currency &&
+      this.exchangeRates[this.defaultCurrency] &&
+      this.defaultCurrency
+    ) {
+      this.convertedValue = formatter.format(
         this.transaction.amount /
           this.exchangeRates[this.defaultCurrency][this.transaction.currency]
       );

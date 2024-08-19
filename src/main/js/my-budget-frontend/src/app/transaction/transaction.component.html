@@ -1,4 +1,4 @@
-@if (transaction && convertedValue) {
+@if (transaction && convertedValue && exchangeRates.date) {
 <div class="transaction">
   <div class="transactionSection">
     <p class="upper">{{transaction.description}}</p>

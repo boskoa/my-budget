@@ -21,14 +21,13 @@ import { AccountsService } from "../accounts.service";
 })
 export class TransactionsComponent implements OnInit {
   lastSelected: string = "";
+  transactions: Array<Transaction> = [];
+  accounts: Array<string> = [];
 
   constructor(
     private transactionsService: TransactionsService,
     private accountsService: AccountsService
   ) {}
-
-  transactions: Array<Transaction> = [];
-  accounts: Array<string> = [];
 
   ngOnInit(): void {
     this.transactionsService.getTransactions("").subscribe((data) => {

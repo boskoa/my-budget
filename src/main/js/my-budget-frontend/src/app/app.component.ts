@@ -23,5 +23,9 @@ export class AppComponent implements OnInit {
     } else {
       this.defaultCurrencyService.setDefaultCurrency("eur");
     }
+
+    this.defaultCurrencyService.setDefaultCurrency(
+      this.defaultCurrencyService.getDefaultCurrency()
+    );
   }
 }
