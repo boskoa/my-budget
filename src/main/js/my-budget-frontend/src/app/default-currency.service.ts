@@ -1,13 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { defaultRates } from "./defaultRates";
 
 @Injectable({
   providedIn: "root",
 })
 export class DefaultCurrencyService {
   private defaultCurrency: string = "eur";
-  private exchangeRates: any;
+  private exchangeRates: any = defaultRates;
 
   getDefaultCurrency(): string {
     return this.defaultCurrency;
